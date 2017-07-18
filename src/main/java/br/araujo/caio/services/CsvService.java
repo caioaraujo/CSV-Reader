@@ -8,7 +8,7 @@ import br.araujo.caio.exceptions.ResourceNotFoundException;
 
 public interface CsvService {
 
-	static final String FILEPATH = "files/";
+	static final String FILEPATH = "/files/";
 
 	/**
 	 * Le um arquivo csv devolvendo um mapeamento contendo seu cabecalho e seus
