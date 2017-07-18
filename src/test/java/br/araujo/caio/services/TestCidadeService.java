@@ -45,6 +45,13 @@ public class TestCidadeService {
 		assertEquals(expectedValue, obtainedValue);
 	}
 
+	/**
+	 * Mock do service original para nao utilizar as camadas mais internas do
+	 * sistema e testar apenas o service
+	 * 
+	 * @author Caio
+	 *
+	 */
 	class CidadeServiceMock extends CidadeServiceImpl {
 
 		@Override
@@ -54,6 +61,12 @@ public class TestCidadeService {
 
 	}
 
+	/**
+	 * Mock do CidadeDAOImpl para retornar valores fixos dos metodos
+	 * 
+	 * @author Caio
+	 *
+	 */
 	class CidadeDAOMock extends CidadeDAOImpl {
 		public CidadeDAOMock(String header, List<Cidade> cidades) {
 			super(header, cidades);

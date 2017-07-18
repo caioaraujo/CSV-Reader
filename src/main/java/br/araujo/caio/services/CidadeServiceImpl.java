@@ -38,7 +38,7 @@ public class CidadeServiceImpl implements CidadeService {
 	}
 
 	protected CidadeDAO getCidadeDAO(String header, List<Cidade> cidades) {
-		return DAOFactory.getCidadeDAO(null, cidades);
+		return DAOFactory.getCidadeDAO(header, cidades);
 	}
 
 }

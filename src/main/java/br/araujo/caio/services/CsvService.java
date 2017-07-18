@@ -6,7 +6,7 @@ import java.util.Map;
 
 import br.araujo.caio.exceptions.ResourceNotFoundException;
 
-public interface CsvReaderService {
+public interface CsvService {
 
 	static final String FILEPATH = "files/";
 

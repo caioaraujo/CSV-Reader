@@ -1,5 +1,11 @@
 package br.araujo.caio.enums;
 
+/**
+ * Contem os tipos possíveis de entrada do usuário
+ * 
+ * @author Caio
+ *
+ */
 public enum Input {
 	EXIT("0"), COUNT("count"), ALL_LINES("*"), DISTINCT("distinct"), FILTER("filter");
 

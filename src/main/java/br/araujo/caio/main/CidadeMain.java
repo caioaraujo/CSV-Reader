@@ -11,9 +11,9 @@ import br.araujo.caio.exceptions.ResourceNotFoundException;
 import br.araujo.caio.factories.ServiceFactory;
 import br.araujo.caio.models.Cidade;
 import br.araujo.caio.services.CidadeService;
-import br.araujo.caio.services.CsvReaderService;
+import br.araujo.caio.services.CsvService;
 
-public class Main {
+public class CidadeMain {
 
 	private static final String FILENAME = "cidades.csv";
 
@@ -22,11 +22,12 @@ public class Main {
 		System.out.println("Lendo arquivo " + FILENAME + "...");
 		try {
 			// Leitura do arquivo csv
-			CsvReaderService csvReader = ServiceFactory.getCsvReaderService();
+			CsvService csvReader = ServiceFactory.getCsvReaderService();
 			Map<String, Object> fileContent = csvReader.read(FILENAME);
 			String header = (String) fileContent.get("header");
 			List<Cidade> cidades = (List<Cidade>) fileContent.get("rows");
 
+			// Monta as instruções ao usuário
 			System.out.println("Arquivo processado.");
 			StringBuilder instructions = new StringBuilder();
 			instructions.append("Por favor, informe os comandos para consulta: \n");
@@ -48,26 +49,25 @@ public class Main {
 					System.exit(0);
 				}
 
-				String[] inputs = inputSequence.split(" ");
+				CidadeService cidadeService = ServiceFactory.getCidadeService();
 
 				// Valida os comandos enviados
-				CidadeService cidadeService = ServiceFactory.getCidadeService();
+				String[] inputs = inputSequence.split(" ");
 				Boolean isValid = cidadeService.isValid(inputs);
 				if (!isValid) {
 					System.out.println("Comando inválido. Por favor, tente novamente:");
 					continue;
 				}
 
+				// Separa as entradas digitadas
 				String firstInput = inputs[0];
 				String secondInput = inputs[1];
 				String thirdInput = null;
-
 				if (inputs.length > 2)
 					thirdInput = inputs[2];
 
 				// Verifica se foi solicitada contagem de registros
 				if (Input.COUNT == Input.fromString(firstInput)) {
-
 					Integer total = cidadeService.count(cidades, secondInput, thirdInput);
 					System.out.println("Total de registros encontrados: " + total);
 				}

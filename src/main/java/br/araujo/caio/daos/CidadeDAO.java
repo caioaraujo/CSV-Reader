@@ -18,5 +18,14 @@ public interface CidadeDAO {
 	 */
 	Integer countDistinct(String property);
 
+	/**
+	 * Filtra os registros pelo valor da propriedade indicada
+	 * 
+	 * @param property
+	 *            - propriedade a ser filtrada
+	 * @param value
+	 *            - valor correspondente a propriedade
+	 * @return Uma string contendo todos os resultados encontrados
+	 */
 	String filterValues(String property, String value);
 }

@@ -35,6 +35,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 	@Override
 	public Integer countDistinct(String property) {
 
+		// Busca o metodo get do modelo Cidade relacionado a propriedade enviada
 		String method = this.getMethodName(property);
 		if (method == null)
 			return 0;
@@ -42,9 +43,13 @@ public class CidadeDAOImpl implements CidadeDAO {
 		Set<Object> occurrences = new HashSet<Object>();
 		for (Cidade cidade : cidades) {
 			try {
+				// Carrega e chama o metodo para recuperar o valor da
+				// propriedade no modelo
 				Method methodName = Cidade.class.getMethod(method);
 				Object value = methodName.invoke(cidade);
 
+				// Se encontrado, o valor é adicionado a um set list para
+				// garantir a não-repetição do elemento na lista
 				if (value != null)
 					occurrences.add(value);
 			} catch (NoSuchMethodException | SecurityException e) {
@@ -54,20 +59,27 @@ public class CidadeDAOImpl implements CidadeDAO {
 			}
 
 		}
+
 		return occurrences.size();
 	}
 
 	@Override
 	public String filterValues(String property, String value) {
+		// Busca o metodo get do modelo Cidade relacionado a propriedade enviada
 		String method = this.getMethodName(property);
 		if (method == null || value == null)
 			return "";
 
+		// Inicia a string de retorno com o cabeçalho do arquivo carregado
 		StringBuilder result = new StringBuilder(header);
 		for (Cidade cidade : cidades) {
 			try {
+				// Através de reflexão, executa uma chamada ao método get do
+				// modelo relacionado a propriedade enviada.
 				Method methodName = Cidade.class.getMethod(method);
 				Object obtainedValue = methodName.invoke(cidade);
+				// Caso encontre o valor esperado, adiciona o conteudo de cidade
+				// na string de retorno
 				if (obtainedValue != null && value.equalsIgnoreCase(obtainedValue.toString())) {
 					result.append("\n");
 					result.append(cidade.toString());
