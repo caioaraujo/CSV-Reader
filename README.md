@@ -10,4 +10,4 @@ Na raíz do projeto, digite "mvn test"
 Para executar o programa via Maven:
 Na raíz do projeto, digite "mvn package" para construir e em seguida digite "java -cp target/DesafioJava.jar br.araujo.caio.main.CidadeMain"
 
-Nota: O arquivo cidades.csv está incluído nos resources do projeto :)
+Nota: Um arquivo csv de demonstração está incluído nos resources do projeto
